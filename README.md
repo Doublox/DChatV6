@@ -11,7 +11,7 @@ Doublox#9803 or 𝕆𝕃𝕀𝕍𝔸#3743
 
 
 
-preview : https://cdn.discordapp.com/attachments/722783673279316075/744921952657080442/a924c9ac8dc0cb4dad4ff9fd67c2da2d-png.jpg
+preview : 
 preview : https://streamable.com/1lmhlo
 
 
