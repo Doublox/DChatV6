@@ -1,18 +1,19 @@
 # DChatV6
 
-## Disclaimer
-## FEEL FREE TO EDIT THE CODE FOR PERSONAL USE!
-## DO NOT SHARE THE WORK AS YOUR OWN!
-## DO NOT SELL THIS WORK!
-## -= FOR PERSONAL USE ONLY =-
-## You are not allowed to modify the repository and re-release it, you can only fork it
-## If you want to contribute (like translation) you can make a pull request or open a new issue or contact 
+# Disclaimer
+### FEEL FREE TO EDIT THE CODE FOR PERSONAL USE!
+### DO NOT SHARE THE WORK AS YOUR OWN!
+### DO NOT SELL THIS WORK!
+# -= FOR PERSONAL USE ONLY =-
+### You are not allowed to modify the repository and re-release it, you can only fork it
+### If you want to contribute (like translation) you can make a pull request or open a new issue or contact 
 Doublox#9803 or 𝕆𝕃𝕀𝕍𝔸#3743
 
 
 
-preview : 
-preview : https://streamable.com/1lmhlo
+-Preview : https://gyazo.com/a924c9ac8dc0cb4dad4ff9fd67c2da2d
+
+-Preview : https://streamable.com/1lmhlo
 
 
 # Installation
@@ -52,9 +53,9 @@ Functionaliter its here present in the streamable if you have questions you can 
 ```
 ### TO DO
 
--add new fonctions on the chat 
--modify the boxes to add all the functions required for each box
--more ...!
+- add new fonctions on the chat 
+- modify the boxes to add all the functions required for each box
+- more ...!
 
 ### Dependencies
 
