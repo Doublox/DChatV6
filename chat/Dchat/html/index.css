@@ -1,0 +1,196 @@
+.color-0{color: #ffffff;}
+.color-1{color: #ff4444;}
+.color-2{color: #99cc00;}
+.color-3{color: #ffbb33;}
+.color-4{color: #0099cc;}
+.color-5{color: #33b5e5;}
+.color-6{color: #aa66cc;}
+.color-8{color: #cc0000;}
+.color-9{color: #cc0068;}
+
+* {
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.no-grow {
+  flex-grow: 0;
+}
+
+em {
+  font-style: normal;
+}
+
+#app {
+  font-family: 'Calibri', Verdana;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: rgb(255, 0, 0);
+}
+
+.chat-window {
+  position: absolute;
+  top: 2.5%; 
+  right: 0.8%;
+  width: 30%;
+  height: 22%;
+  max-width: 1000px;
+  background-color: rgb(2, 2, 2);
+  -webkit-animation-duration: 2s;
+
+  border-top-left-radius: 1vw;
+  border-top-right-radius: 1vw;
+  background-color: rgb(2, 2, 2, 0.78);
+  border: 1px solid rgba(0, 0, 0, 0.9);
+border-radius: 2px;
+}
+
+.header {
+  position: absolute;
+  width: 30%;
+  right: 0.8%;
+  top: 24.5%;
+}
+
+.tablink {
+  background-color: rgba(0, 0, 0, 0.404);
+  color: rgb(255, 0, 0);
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 8px 13px;
+  font-size: 13px; 
+  width: 33.3%;
+  background-color: rgb(2, 2, 2, 0.78);
+  border: 1.2px solid rgba(0, 0, 0, 0.9);
+border-radius: 1px;
+  /*les 4 boutons*/
+  
+}
+/*Doublox#9803*/
+.borderBotLeft {
+  border-bottom-left-radius: 1vw;
+}
+
+.borderBotRight {
+  border-bottom-right-radius: 1vw;
+}
+
+.tablink:hover {
+  color: black;
+  background-color: rgb(255, 0, 0);
+}
+
+#emoji {
+  position: absolute;
+  font-size: 1.5vh;
+  right: 1%;
+  top: 20%;
+}
+
+.chat-messages {
+  position: relative;
+  height: 95%;
+  font-size: 1.5vh;
+  margin: 1%;
+  
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+
+.chat-input {  /*position du chat*/
+  font-size: 1.65vh;
+  position: absolute;
+
+  top: 29%;
+  right: 0.8%;
+  width: 30%;
+  max-width: 1000px;
+  box-sizing: border-box;
+  border-radius: 1vw;
+}
+
+.prefix { /*touche pas a sa */
+  font-size: 1.8vh;
+  position: absolute;
+  margin-top: 0.5%;
+  left: 0.208%;
+}
+
+textarea {/*tout ce qui touche au texte que tu marque */
+  --border-width: 5px;
+  font-size: 1.5vh;
+  display: flex;
+  box-sizing: border-box;
+  padding-top: 1.1%;
+  padding-left: 5.4%;
+  padding-bottom: 2.4%;
+  padding-right: 1.6%;
+  color: rgb(255, 0, 0);/* le texte de ce que tu marque dans le chat*/ 
+   background-color: rgb(2, 2, 2, 0.78);
+    border: 2px solid rgba(0, 0, 0, 0.9);
+  border-radius: 2px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  resize: none;
+  /*Doublox#9803*/
+}
+
+textarea:focus, input:focus {
+    outline: none;
+    background-color: rgb(2, 2, 2, 0.72);
+}
+
+.msg {
+  margin-bottom: 0.28%;
+}/*Doublox#9803*/
+
+.multiline {
+  /*
+    touche pas frère sa va te bz ton script
+    background-color: rgb(2, 2, 2);
+  */
+  margin-left: 4%;
+  text-indent: -1.2rem;
+  white-space: pre-line;
+}
+/*Doublox#9803*/
+.suggestions {
+  list-style-type: none;
+ padding: 5px;
+ padding-left: 27px;
+ font-size: 0.9rem;
+ box-sizing: border-box;
+ color: red; /* couleur des suggestion en bas de ton texte que tu va envoyer*/
+ background-color: rgba(0, 0, 0, 0.623);
+ border: 0px solid rgba(0, 0, 0, 0.9);
+ width: 65%;
+}
+
+.help {
+  color: #b0bbbd;
+}
+
+.disabled {
+  color: #b0bbbd;
+}
+/*Doublox#9803*/
+.suggestion {
+  margin-bottom: 0.5%;
+}
+
+.hidden {
+  display: none;
+}
+
+.iconChat {
+  width: 1.5vw;
+}
+
+.iconChatIRS {
+  width: 5.5vw;
+}/*Doublox#9803*/
