@@ -32,8 +32,7 @@ If that link doesn't work, Use this: https://discord.gg/TkCx7mt
 
 # Description 
 ```
-This is a functional chat outside esx so for the vrp its works very well also it works with all the framwork without
-specifying
+This is a functional chat outside esx so for the vrp its works you can edit the server.lua and client.lua
 Functionaliter its here present in the streamable if you have questions you can come to me dm good video
 ```
 ### Release History
