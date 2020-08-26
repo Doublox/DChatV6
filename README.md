@@ -18,13 +18,28 @@ Doublox#9803 or 𝕆𝕃𝕀𝕍𝔸#3743
 -Preview : https://streamable.com/1lmhlo
 
 
-# Installation
+# Installation for esx
 
- 1. Place folder Dchat in you /resources/ folder
+1 Place folder Dchat in you /resources/ folder
 
- 2. Add Dchat in your server.cfg file
+2 delete the D of Dchat (rename this)
 
- 3. Start your server and enjoy!
+3 Add ''chat'' in your server.cfg file
+
+4 Start your server and enjoy! 
+
+
+# Installation for vrp
+
+1 Place folder Dchat in you /resources/ folder
+
+2 delete the D of Dchat (rename this)
+
+3 Add ''chat'' in your server.cfg file
+
+4 And add permissions
+
+5 Start your server and enjoy! 
 
 # Discord 
 
@@ -34,7 +49,7 @@ If that link doesn't work, Use this: https://discord.gg/TkCx7mt
 
 # Description 
 ```
-This is a functional chat outside esx so for the vrp its works you can edit the server.lua and client.lua
+This is a functional chat outside esx so for the vrp its works for all framework :D 
 Functionaliter its here present in the streamable if you have questions you can come to me dm good video
 ```
 ### Release History
@@ -63,7 +78,7 @@ Functionaliter its here present in the streamable if you have questions you can 
 Nothing is a chat !!
 
 ### Inspired By
-chat :D
+default chat :D
 
 
 # MORE UPDATES IN THE FUTURE!
