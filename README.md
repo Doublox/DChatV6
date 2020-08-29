@@ -14,7 +14,7 @@ Doublox#9803 or 𝕆𝕃𝕀𝕍𝔸#3743
 
 
 -Preview : https://gyazo.com/a924c9ac8dc0cb4dad4ff9fd67c2da2d
-
+-Install : https://www.youtube.com/watch?v=T6AG20AW3T4
 -Preview : https://streamable.com/1lmhlo
 
 
