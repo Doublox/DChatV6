@@ -48,11 +48,6 @@ AddEventHandler('_chat:messageEnteredA', function(author, color, message)
         end
     
         print(author .. '^7: ' .. message .. '^7')
-    else 
-        TriggerClientEvent('esx:showNotification', source, '**Début de la discutions !**')
-        TriggerClientEvent('esx:showNotification', source, '[Crypted] Hmmm vous etes pas quelqu"un d"important a ce que je vois ! [Crypted]')
-        TriggerClientEvent('esx:showNotification', source, '**Fin de la discutions !**')
-    end
 end)
 
 AddEventHandler('_chat:messageEnteredG', function(author, color, message)
