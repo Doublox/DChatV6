@@ -6,6 +6,9 @@ local chatHidden = true
 local chatLoaded = false
 local hideChat = false
 local curDelayTime = 3
+local group = 'user'
+AddEventHandler('onClientResourceStart', function(name)
+  print(name)
 
 AddEventHandler('onClientResourceStart', function(name)
   print(name)
@@ -46,6 +49,50 @@ AddEventHandler('chatMessage', function(author, color, text)
     })
   end
 end)
+    
+RegisterNetEvent('setGroupStaff')
+AddEventHandler('setGroupStaff', function(groupe)
+group = groupe
+end)
+
+AddEventHandler('ReportAntiSpam', function()
+  if not antispam then
+  antispam = true
+  Citizen.Wait(600 * 1000)
+  antispam = false
+  end
+  end)
+
+
+hide = 0 
+RegisterCommand('chatmute', function()
+    TriggerEvent('dbx:mute')
+    hide = 0
+end)
+
+RegisterCommand('chatunmute', function()
+    hide = hide + 1
+end)
+
+RegisterNetEvent('dbx:mute')
+AddEventHandler('dbx:mute', function()
+Citizen.CreateThread(function()
+  while true do
+    if hide == 0 then 
+      Citizen.Wait(50)
+      TriggerEvent('chat:clear')
+    else
+        break
+    end
+    end
+  end)
+end)       	
+
+RegisterCommand('clearchat', function()
+      Citizen.Wait(50)
+      TriggerEvent('chat:clear')
+          end)
+    
 --Doublox#9803---
 AddEventHandler('chatMessageA', function(author, color, text)
   if hideChat == false then
@@ -189,7 +236,8 @@ end)
 RegisterNUICallback('chatResultA', function(data, cb)
   chatInputActive = false
   SetNuiFocus(false, false)
-
+  
+  local msg = data.message
   if not data.canceled then
     local id = PlayerId()
 
@@ -197,13 +245,31 @@ RegisterNUICallback('chatResultA', function(data, cb)
     local r, g, b = 0, 0x99, 255
 
     if data.message:sub(1, 1) == '/' then
+      if msg:sub(1, 7) == '/report' or msg:sub(1, 7) == '/Report' then
+        if group == 'user' and antispam == false then
+          TriggerEvent('ReportAntiSpam')
+          TriggerEvent('chatMessageA', 'Succès', {95, 173, 81}, 'Votre report à bien été envoyé ! 🔍')
+          TriggerServerEvent('reportgo', msg:sub(8, 60))
+        else
+          TriggerEvent('chatMessageA', 'Erreur', {255, 0, 0}, 'Vous devez attendre un peu avant de refaire un report.')
+        end
       ExecuteCommand(data.message:sub(2))
     else
       TriggerServerEvent('_chat:messageEnteredA', GetPlayerName(id), { r, g, b }, data.message)
     end
+  elseif group ~= 'user' then
+    TriggerServerEvent('chatAdmin:send', GetPlayerName(PlayerId()), msg)
+    else
+    TriggerEvent('chatMessageA', 'Erreur', {255, 0, 0}, 'Le chat Admin écrit est désactivé. Notre discord: ^3discord.gg/')
+    TriggerEvent('chatMessageA', 'Erreur', {255, 0, 0}, "Besoin d'aide? la commande /report est à votre disposition.")
+    end
+
   end
+ 
+    
 
   cb('ok')
+  
 end)
 
 RegisterNUICallback('chatResultG', function(data, cb)
