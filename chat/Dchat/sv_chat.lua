@@ -35,19 +35,17 @@ AddEventHandler('_chat:messageEntered', function(author, color, message)
 end)
 
 AddEventHandler('_chat:messageEnteredA', function(author, color, message)
-    local xPlayer = ESX.GetPlayerFromId(source)
-    if xPlayer.job.name == 'ambulance' then 
-        if not message or not author then
-            return
-        end
-    
-        TriggerEvent('chatMessageA', source, author, message)
-    
-        if not WasEventCanceled() then
-            TriggerClientEvent('chatMessageA', -1, author,  { 255, 255, 255 }, message)
-        end
-    
-        print(author .. '^7: ' .. message .. '^7')
+    if not message or not author then
+        return
+    end
+
+    TriggerEvent('chatMessageA', source, author, message)
+
+    if not WasEventCanceled() then
+        TriggerClientEvent('chatMessageA', -1, author,  { 255, 255, 255 }, message)
+    end
+
+    print(author .. '^7: ' .. message .. '^7')
 end)
 
 AddEventHandler('_chat:messageEnteredG', function(author, color, message)
