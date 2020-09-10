@@ -43,7 +43,7 @@ Doublox#9803 or 𝕆𝕃𝕀𝕍𝔸#3743
 
 # Discord 
 
-Don't forget to join us on Discord: https://discord.me/szqYGc3
+Don't forget to join us on Discord: D_leak
 If that link doesn't work, Use this: https://discord.gg/zPQUWQ9
 If that link doesn't work, Use this: https://discord.gg/TkCx7mt
 
