@@ -9,6 +9,7 @@ local curDelayTime = 3
 local group = 'user'
 AddEventHandler('onClientResourceStart', function(name)
   print(name)
+end)
 
 AddEventHandler('onClientResourceStart', function(name)
   print(name)
