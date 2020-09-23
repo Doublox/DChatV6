@@ -250,7 +250,7 @@ RegisterNUICallback('chatResultA', function(data, cb)
         if group == 'user' and antispam == false then
           TriggerEvent('ReportAntiSpam')
           TriggerEvent('chatMessageA', 'Succès', {95, 173, 81}, 'Votre report à bien été envoyé ! 🔍')
-          TriggerServerEvent('reportgo', msg:sub(8, 60))
+          TriggerServerEvent('report', msg:sub(8, 60))
         else
           TriggerEvent('chatMessageA', 'Erreur', {255, 0, 0}, 'Vous devez attendre un peu avant de refaire un report.')
         end
