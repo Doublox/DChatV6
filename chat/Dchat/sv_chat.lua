@@ -13,7 +13,8 @@ RegisterServerEvent('_chat:messageEnteredG')
 RegisterServerEvent('chat:clear')
 RegisterServerEvent('__cfx_internal:commandFallback')
 
-ESX = nil 
+ESX = nil
+Dchat = false
 
 Citizen.CreateThread(function()
     while ESX == nil do 
@@ -132,7 +133,25 @@ print ("DBX ChatV6 Log")
 print (os.date ("%x %c"))
 
 
-------------------------------
+---------------------------- Cancel Chat ------------------
+
+AddEventHandler('chatMessage', function(source, name, message)
+    if message == '/deletechat' then
+      Dchat = not Dchat
+      if Dchat then
+        TriggerClientEvent('chatMessage', -1, 'Cancel Chat', {201, 55, 150}, name .. ' has canceled chat for everyone.')
+      else
+        TriggerClientEvent('chatMessage', -1, 'Cancel Chat', {201, 55, 150}, name .. ' has enabled chat for everyone.')
+      end
+      CancelEvent()
+    else
+      if Dchat then
+        TriggerClientEvent('chatMessage', source, 'Cancel Chat', {201, 55, 150}, name .. ' has canceled chat for everyone, your message was deleted.')
+        CancelEvent()
+      end
+    end
+  end)
+  
 ------------------------------
 RegisterCommand("drknt", function(source, args, rawCommand)
     local message = table.concat(args, " ")
