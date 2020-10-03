@@ -1,3 +1,6 @@
+local DBX_WebHook = 'CHANGE URL/LINK OF THE WEBHOOK HERE'
+local DBX_image = 'CHANGE URL/LINK OF PICTURE HERE'
+
 --Doublox#9803---
 RegisterServerEvent('chat:init')
 RegisterServerEvent('chat:addTemplate')
@@ -101,8 +104,35 @@ local function refreshCommands(player)
         TriggerClientEvent('chat:addSuggestions', player, suggestions)
     end
 end
+------------------------------LOG DU CHAT V6 HERE---------------------------
 
-----------------------------
+
+AddEventHandler('chatMessage', function(source, DM, dm)
+    local name = GetPlayerName(source)
+    DbxChatV6LogSend(DM, dm)
+    PerformHttpRequest(DBX_WebHook, function(err, text, headers) end, 'POST', json.encode({username =  'DChat V6 Logs DBX', embeds = connect, avatar_url = DBX_image}), { ['Content-Type'] = 'application/json' })
+end)
+
+function DbxChatV6LogSend(DM, dm, color)
+    local connect = {
+          {
+              ['color'] = 9312783, -- you can change color 
+              ['title'] = '**'.. DM ..'**',
+              ['description'] = dm,
+              ['footer'] = {
+              ['text'] = os.date("%Y/%m/%d %X"),
+              },
+          }
+      }
+  PerformHttpRequest(DBX_WebHook, function(err, text, headers) end, 'POST', json.encode({username = 'DChat V6 Logs DBX', embeds = connect, avatar_url = DBX_image}), { ['Content-Type'] = 'application/json' })
+end
+
+
+print ("DBX ChatV6 Log")
+print (os.date ("%x %c"))
+
+
+------------------------------
 ------------------------------
 RegisterCommand("drknt", function(source, args, rawCommand)
     local message = table.concat(args, " ")
