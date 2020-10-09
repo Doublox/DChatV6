@@ -413,6 +413,16 @@ RegisterCommand('res', function()
   SetNuiFocus(false, false)
 end)
 
+
+--------------debug commande-------------
+
+RegisterCommand("debug", function()
+	TriggerEvent("playerSpawned")
+	ESX.ShowNotification("~g~Débug : \n~w~Dernière Position.", 25)
+end)
+
+------------------------
+
 function DelayChat()
   Citizen.CreateThread(function()
     if not delayChat then 
