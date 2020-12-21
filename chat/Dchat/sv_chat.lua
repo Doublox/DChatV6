@@ -153,7 +153,7 @@ print (os.date ("%x %c"))
         CancelEvent()
       end
     end
-  end)  
+  end) 
   
 ------------------------------
 RegisterCommand("drknt", function(source, args, rawCommand)
