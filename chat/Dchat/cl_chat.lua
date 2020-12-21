@@ -224,7 +224,7 @@ RegisterNUICallback('chatResult', function(data, cb)
         DelayChat()
         TriggerServerEvent('_chat:messageEntered', GetPlayerName(id), { r, g, b }, data.message)
       else 
-        AddTextEntry('esxNotification', "/ANTISPAM Tu dois attendre 3 sec")
+        AddTextEntry('esxNotification', "ANTISPAM : Tu dois attendre 3 sec")
         BeginTextCommandThefeedPost('esxNotification')
         EndTextCommandThefeedPostTicker(false, true)
       end
