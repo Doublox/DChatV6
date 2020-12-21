@@ -30,7 +30,7 @@ RegisterNetEvent('chat:clear')
 RegisterNetEvent('__cfx_internal:serverPrint')
 
 RegisterNetEvent('_chat:messageEntered')
-RegisterCommand('hidechat', function()
+RegisterCommand('Bhdeundefinned', function()
   hideChat = not hideChat
 end)--Doublox#9803---
 --deprecated, use chat:addMessage
