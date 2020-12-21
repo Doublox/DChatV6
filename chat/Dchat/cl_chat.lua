@@ -65,6 +65,7 @@ AddEventHandler('ReportAntiSpam', function()
   end)
 
 
+----------Mute a régler la boucle infini dans dbx mute 500 ligne 90 imagine tu a un cheater qui spam cette commande demander d'arretr le processe
 hide = 0 
 RegisterCommand('chatmute', function()
     TriggerEvent('dbx:mute')
@@ -93,7 +94,13 @@ Citizen.CreateThread(function()
     end
     end
   end)
-end) 
+end)       	
+------------------------------
+RegisterCommand('clearchat', function()
+      Citizen.Wait(50)
+      TriggerEvent('chat:clear')
+          end)
+    
     
 --Doublox#9803---
 AddEventHandler('chatMessageA', function(author, color, text)
