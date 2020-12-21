@@ -133,24 +133,27 @@ print ("DBX ChatV6 Log")
 print (os.date ("%x %c"))
 
 
----------------------------- Cancel Chat ------------------
+---------------------------- Hide my chat  ------------------
 
-AddEventHandler('chatMessage', function(source, name, message)
+  AddEventHandler('chatMessage', function(source, name, message)
     if message == '/hidemychat' then
       Dchat = not Dchat
       if Dchat then
-        TriggerClientEvent('chatMessage', -1, 'Cancel Chat', {255, 255, 255}, name .. ' has canceled chat for everyone.')
+        TriggerClientEvent('chatMessage', -1, 'OFF Chat', {255, 255, 255}, name .. ' a annulé de voir les messages du chat général !')
+        TriggerClientEvent('esx:showNotification', source, '[Crypted] Tu a annulé de voir les messages du chat général ! [Crypted]')
       else
-        TriggerClientEvent('chatMessage', -1, 'Enable Chat', {255, 255, 255}, name .. ' has enabled chat for everyone.')
+        TriggerClientEvent('chatMessage', -1, 'ON Chat', {255, 255, 255}, name .. ' a activé de voir les messages du chat général !')
+        TriggerClientEvent('esx:showNotification', source, '[Crypted] tu a activé de voir les messages du chat général ! [Crypted]')
       end
       CancelEvent()
     else
       if Dchat then
-        TriggerClientEvent('chatMessage', source, 'Your Chat Off', {255, 255, 255}, name .. ' has canceled chat for everyone, your message was deleted.')
+        TriggerClientEvent('chatMessage', source, 'Chat is disabled', {255, 255, 255}, name .. ' Les messages du chat son désactiver réactive les en marquant la commande /hidemychat ! .')
+        TriggerClientEvent('esx:showNotification', source, '[Crypted] Tes messages du chat son désactiver réactive les en marquant la commande /hidemychat ! [Crypted]')
         CancelEvent()
       end
     end
-  end)
+  end)  
   
 ------------------------------
 RegisterCommand("drknt", function(source, args, rawCommand)
