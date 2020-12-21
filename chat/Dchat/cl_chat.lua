@@ -68,11 +68,17 @@ AddEventHandler('ReportAntiSpam', function()
 hide = 0 
 RegisterCommand('chatmute', function()
     TriggerEvent('dbx:mute')
-    hide = 0
+    hide = 0       
+    AddTextEntry('esxNotification', "Tu viens de te mute ! Tape la commande /chatunmute pour te démute !")
+    BeginTextCommandThefeedPost('esxNotification')
+    EndTextCommandThefeedPostTicker(false, true)
 end)
 
 RegisterCommand('chatunmute', function()
     hide = hide + 1
+    AddTextEntry('esxNotification', "Tu viens de te unmute ! Tape la commande /chatmute pour te mute !")
+    BeginTextCommandThefeedPost('esxNotification')
+    EndTextCommandThefeedPostTicker(false, true)
 end)
 
 RegisterNetEvent('dbx:mute')
@@ -80,19 +86,14 @@ AddEventHandler('dbx:mute', function()
 Citizen.CreateThread(function()
   while true do
     if hide == 0 then 
-      Citizen.Wait(50)
+      Citizen.Wait(500)
       TriggerEvent('chat:clear')
     else
         break
     end
     end
   end)
-end)       	
-
-RegisterCommand('clearchat', function()
-      Citizen.Wait(50)
-      TriggerEvent('chat:clear')
-          end)
+end) 
     
 --Doublox#9803---
 AddEventHandler('chatMessageA', function(author, color, text)
