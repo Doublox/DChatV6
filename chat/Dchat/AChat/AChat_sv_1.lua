@@ -1,4 +1,4 @@
-webhook = "https://discord.com/api/webhooks/791325103367127050/hRKjb8W9ZSVlXFsbxPTdK87NcQHCpmR6lLHaBJtrUN5pDmVQcP7u78RdX3VDPsqCsM_8"
+webhook = "ADD YOU WEBHOOK LOG BLACLIST COMMAND HERE"
 
 
 RegisterNetEvent("log")
