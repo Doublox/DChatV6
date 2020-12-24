@@ -1,7 +1,14 @@
 ui_page 'html/index.html'
 
-client_script 'cl_chat.lua'
-server_script 'sv_chat.lua'
+client_script{ 
+    'cl_chat.lua',
+    'AChat/AChat cl.lua'
+    }
+          
+server_script{
+    'sv_chat.lua',
+    'AChat/AChat_sv_1.lua'
+    } 
 
 files {
     'html/index.html',
