@@ -2,7 +2,7 @@ ui_page 'html/index.html'
 
 client_script{ 
     'cl_chat.lua',
-    'AChat/AChat cl.lua'
+    'AChat/AChat_cl.lua'
     }
           
 server_script{
