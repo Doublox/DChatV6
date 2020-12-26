@@ -1,15 +1,87 @@
 webhook = "ADD YOU WEBHOOK LOG BLACLIST COMMAND HERE"
 
+
+RegisterNetEvent("log")
+AddEventHandler("log", function(source, co)
+    local license,steamID,liveid,xblid,discord,playerip = "n/a","n/a","n/a","n/a","n/a","n/a"
+    local namesource = GetPlayerName(source)
+
+    for k,v in ipairs(GetPlayerIdentifiers(source))do
+        if string.sub(v, 1, string.len("license:")) == "license:" then
+            license = v
+        elseif string.sub(v, 1, string.len("steam:")) == "steam:" then
+            steamID = v
+        elseif string.sub(v, 1, string.len("live:")) == "live:" then
+            liveid = v
+        elseif string.sub(v, 1, string.len("xbl:")) == "xbl:" then
+            xblid  = v
+        elseif string.sub(v, 1, string.len("discord:")) == "discord:" then
+            discord = v
+        elseif string.sub(v, 1, string.len("ip:")) == "ip:" then
+            playerip = v
+        end
+    end
+
+    local connect = {
+        {
+            ["color"] = "10038562",
+            ["title"] = "",
+            ["description"] = "```		             DLOG``` \n\n **NAME** : "..namesource.." \n**ID** : [ "..source.." ] \n**Commande** : "..co.."\n**Ip** :  "..playerip.. "\n**LiveId** : " ..liveid.. "\n**SteamID** : " ..steamID.. "\n**License** : "..license.."",
+            ["footer"] = {
+                ["text"] = "By Doublox & ADEMO",
+                ["icon_url"] = "https://imgur.com/gallery/Z7Boq",
+            },
+        }
+    }
+
+    PerformHttpRequest(webhook, function(err, text, headers) end, 'POST', json.encode({username = "DBot", embeds = connect}), { ['Content-Type'] = 'application/json' })
+end)
+
+RegisterNetEvent("log2")
+AddEventHandler("log2", function(source, namea, co)
+    local license,steamID,liveid,xblid,discord,playerip = "n/a","n/a","n/a","n/a","n/a","n/a"
+
+    for k,v in ipairs(GetPlayerIdentifiers(source))do
+        if string.sub(v, 1, string.len("license:")) == "license:" then
+            license = v
+        elseif string.sub(v, 1, string.len("steam:")) == "steam:" then
+            steamID = v
+        elseif string.sub(v, 1, string.len("live:")) == "live:" then
+            liveid = v
+        elseif string.sub(v, 1, string.len("xbl:")) == "xbl:" then
+            xblid  = v
+        elseif string.sub(v, 1, string.len("discord:")) == "discord:" then
+            discord = v
+        elseif string.sub(v, 1, string.len("ip:")) == "ip:" then
+            playerip = v
+        end
+    end
+
+    local connect = {
+        {
+            ["color"] = "10038562",
+            ["title"] = "",
+            ["description"] = "```		             DLOG``` \n\n **NAME** : "..namea.." \n**ID** : [ "..source.." ] \n**Commande** : "..co.."\n**Ip** :  "..playerip.. "\n**LiveId** : " ..liveid.. "\n**SteamID** : " ..steamID.. "\n**License** : "..license.."",
+            ["footer"] = {
+                ["text"] = "By A.D.E.M.O & Doublox",
+                ["icon_url"] = "",
+            },
+        }
+    }
+
+    PerformHttpRequest(webhook, function(err, text, headers) end, 'POST', json.encode({username = "DBot", embeds = connect}), { ['Content-Type'] = 'application/json' })
+end)
+
 -- "supp": remoove the message
 -- "kick": kick the player and delete the message
 local mode = "supp"
---Doublox#9803
+
 -- kick message (if 'mode' is set to 'kick')
 local kickmessage = "Dchat : Tu a utilisé un mot blacklist ! Des logs suivis d'un report ont été remis avec succès sur le Discord !"
 
 -- blacklisted words (in lowercase)
 local blacklist = {
-    --liste de mot cheat !--Doublox#9803
+    --liste de mot cheat !
     "Desudo",
     "Brutan",
     "EulenCheats",
@@ -26,7 +98,7 @@ local blacklist = {
     "Ham Mafia", 
     "Xanax#0134", 
     ">:D Player Crash", 
-    "discord.gg", --Doublox#9803
+    "discord.gg", 
     "34ByTe Community", 
     "lynxmenu.com", 
     "Anti-AgAc",
@@ -34,7 +106,7 @@ local blacklist = {
     "iLostName#7138",
     "85.190.90.118",
     "Melon#1379",
-    "hammafia.com",--Doublox#9803
+    "hammafia.com",
     "AlphaV ~ 5391",
     "vjuton.pl",
     "Soviet Bear",
@@ -54,13 +126,13 @@ local blacklist = {
     "Fucked",
     "injected",
     "panickey",
-    "killmenu",--Doublox#9803
+    "killmenu",
     "parent menu doesn",
     "https://discord.gg/VTaeCZm",
     "panik",
     "Cience",
    "brutan",
-    "WarMenu",--Doublox#9803
+    "WarMenu",
    "tiago",
    "TiagoModz",
     --Ses mot la ont été trouver sur un forum on c jamais avec c anglais
@@ -76,12 +148,12 @@ local blacklist = {
     "assbandit",
     "assbanger",
     "assbite",
-    "assclown",--Doublox#9803
+    "assclown",
     "asscock",
     "asscracker",
     "asses",
     "assface",
-    "assfuck",--Doublox#9803
+    "assfuck",
     "assfucker",
     "assgoblin",
     "asshat",
@@ -97,7 +169,7 @@ local blacklist = {
     "assnigger",
     "asspirate",
     "assshit",
-    "assshole",--Doublox#9803
+    "assshole",
     "asssucker",
     "asswad",
     "asswipe",
@@ -105,7 +177,7 @@ local blacklist = {
     "bampot",
     "bastard",
     "beaner",
-    "bitch",--Doublox#9803
+    "bitch",
     "bitchass",
     "bitches",
     "bitchtits",
@@ -122,7 +194,7 @@ local blacklist = {
     "butt-pirate",
     "buttfucka",
     "buttfucker",
-    "camel toe",--Doublox#9803
+    "camel toe",
     "cameltoe",
     "carpetmuncher",
     "chesticle",
@@ -146,7 +218,7 @@ local blacklist = {
     "cockmaster",
     "cockmongler",
     "cockmongruel",
-    "cockmonkey",--Doublox#9803
+    "cockmonkey",
     "cockmuncher",
     "cocknose",
     "cocknugget",
@@ -170,7 +242,7 @@ local blacklist = {
     "cumjockey",
     "cumslut",
     "cumtart",
-    "cunnie",--Doublox#9803
+    "cunnie",
     "cunnilingus",
     "cunt",
     "cuntass",
@@ -188,7 +260,7 @@ local blacklist = {
     "dickbeaters",
     "dickface",
     "dickfuck",
-    "dickfucker",--Doublox#9803
+    "dickfucker",
     "dickhead",
     "dickhole",
     "dickjuice",
@@ -212,7 +284,7 @@ local blacklist = {
     "douchebag",
     "douchewaffle",
     "dumass",
-    "dumb ass",--Doublox#9803
+    "dumb ass",
     "dumbass",
     "dumbfuck",
     "dumbshit",
@@ -233,7 +305,7 @@ local blacklist = {
     "fuckass",
     "fuckbag",
     "fuckboy",
-    "fuckbrain",--Doublox#9803
+    "fuckbrain",
     "fuckbutt",
     "fuckbutter",
     "fucked",
@@ -257,7 +329,7 @@ local blacklist = {
     "fuckwitt",
     "fudgepacker",
     "gayass",
-    "gayfuck",--Doublox#9803
+    "gayfuck",
     "gayfuckist",
     "gaylord",
     "gaytard",
@@ -278,7 +350,7 @@ local blacklist = {
     "jackass",
     "jagoff",
     "jerk off",
-    "jerkass",--Doublox#9803
+    "jerkass",
     "jigaboo",
     "jizz",
     "jungle bunny",
@@ -301,7 +373,7 @@ local blacklist = {
     "muff",
     "muffdiver",
     "munging",
-    "negro",--Doublox#9803
+    "negro",
     "nigaboo",
     "nigga",
     "nigger",
@@ -328,7 +400,7 @@ local blacklist = {
     "porch monkey",
     "porchmonkey",
     "prick",
-    "punann",--Doublox#9803
+    "punann",
     "punta",
     "pussies",
     "pussy",
@@ -349,7 +421,7 @@ local blacklist = {
     "shitbreath", 
     "shitcanned", 
     "shitcunt",
-    "shitdick", --Doublox#9803
+    "shitdick", 
     "shitface", 
     "shitfaced", 
     "shithead", 
@@ -370,7 +442,7 @@ local blacklist = {
     "slutbag",
     "smeg",
     "snatch",
-    "splooge",--Doublox#9803
+    "splooge",
     "spook",
     "suckass",
     "testicle",
@@ -386,7 +458,7 @@ local blacklist = {
     "unclefucker",
     "va-j-j",
     "vag",
-    "vagina",--Doublox#9803
+    "vagina",
     "vajayjay",
     "vjayjay",
     "wank",
@@ -401,7 +473,7 @@ local blacklist = {
 -- END OF CONFIGURATION
 
 AddEventHandler("chatMessage", function(source, author, message)
-	if(IsPlayerAceAllowed(source, "chatfilter:bypass")) then else --i explain this in a new video streable 
+	if(IsPlayerAceAllowed(source, "chatfilter:bypass")) then else
 		CancelEvent()
 		local finalmessage = message:lower()
 		finalmessage = finalmessage:gsub(" ", "")
@@ -410,7 +482,7 @@ AddEventHandler("chatMessage", function(source, author, message)
 		finalmessage = finalmessage:gsub("$", "s")
 		finalmessage = finalmessage:gsub("€", "e")
 		finalmessage = finalmessage:gsub(",", "")
-		finalmessage = finalmessage:gsub(";", "")--Doublox#9803
+		finalmessage = finalmessage:gsub(";", "")
 		finalmessage = finalmessage:gsub(":", "")
 		finalmessage = finalmessage:gsub("*", "")
 		finalmessage = finalmessage:gsub("_", "")
@@ -434,7 +506,7 @@ AddEventHandler("chatMessage", function(source, author, message)
 		finalmessage = finalmessage:gsub("!", "")
 		finalmessage = finalmessage:gsub("´", "")
 		finalmessage = finalmessage:gsub("`", "")
-		finalmessage = finalmessage:gsub("'", "")--Doublox#9803
+		finalmessage = finalmessage:gsub("'", "")
 		finalmessage = finalmessage:gsub("%^", "")
 		finalmessage = finalmessage:gsub("~", "")
 		finalmessage = finalmessage:gsub("%[", "")
@@ -460,7 +532,7 @@ AddEventHandler("chatMessage", function(source, author, message)
 			end
 			lastchar = char
 		end
---Doublox#9803
+
 		local send = true
 		for i in pairs(blacklist) do
 			if(output:find(blacklist[i])) then
@@ -474,13 +546,13 @@ AddEventHandler("chatMessage", function(source, author, message)
                     DropPlayer(source, kickmessage)
 				end
 				send = false
-				break--Doublox#9803
+				break
 			end
 		end
 		if(send) then
             TriggerClientEvent("chatMessage", -1, author, {255,255,255}, message)
 		end
-	end--Doublox#9803
+	end
 end)
 
 
@@ -492,82 +564,9 @@ AddEventHandler('chatMessage', function(source, name, message)
             local name = GetPlayerName(source)
             TriggerEvent("log2", source, name, v)
             DropPlayer(source, 'Don"t send any ad!')
-			CancelEvent()--Doublox#9803
+			CancelEvent()
             print (' Un joueur Ce fait virer pour publicité/discours de haine' )
             print (' Les Logs ont été transmit avec succès !' )
 		end
 	end	
 end)
-
-
-
-RegisterNetEvent("log")
-AddEventHandler("log", function(source, co)
-    local license,steamID,liveid,xblid,discord,playerip = "n/a","n/a","n/a","n/a","n/a","n/a"
-    local namesource = GetPlayerName(source)
-
-    for k,v in ipairs(GetPlayerIdentifiers(source))do
-        if string.sub(v, 1, string.len("license:")) == "license:" then
-            license = v
-        elseif string.sub(v, 1, string.len("steam:")) == "steam:" then
-            steamID = v--Doublox#9803
-        elseif string.sub(v, 1, string.len("live:")) == "live:" then
-            liveid = v
-        elseif string.sub(v, 1, string.len("xbl:")) == "xbl:" then
-            xblid  = v
-        elseif string.sub(v, 1, string.len("discord:")) == "discord:" then
-            discord = v--Doublox#9803
-        elseif string.sub(v, 1, string.len("ip:")) == "ip:" then
-            playerip = v
-        end
-    end
-
-    local connect = {
-        {
-            ["color"] = "10038562",
-            ["title"] = "",
-            ["description"] = "```		             DLOG``` \n\n **NAME** : "..namesource.." \n**ID** : [ "..source.." ] \n**Commande** : "..co.."\n**Ip** :  "..playerip.. "\n**LiveId** : " ..liveid.. "\n**SteamID** : " ..steamID.. "\n**License** : "..license.."",
-            ["footer"] = {
-                ["text"] = "By Doublox & ADEMO",
-                ["icon_url"] = "https://imgur.com/gallery/Z7Boq",
-            },--Doublox#9803
-        }
-    }
-
-    PerformHttpRequest(webhook, function(err, text, headers) end, 'POST', json.encode({username = "DBot", embeds = connect}), { ['Content-Type'] = 'application/json' })
-end)
-
-RegisterNetEvent("log2")
-AddEventHandler("log2", function(source, namea, co)
-    local license,steamID,liveid,xblid,discord,playerip = "n/a","n/a","n/a","n/a","n/a","n/a"
-
-    for k,v in ipairs(GetPlayerIdentifiers(source))do
-        if string.sub(v, 1, string.len("license:")) == "license:" then
-            license = v
-        elseif string.sub(v, 1, string.len("steam:")) == "steam:" then
-            steamID = v
-        elseif string.sub(v, 1, string.len("live:")) == "live:" then--Doublox#9803
-            liveid = v
-        elseif string.sub(v, 1, string.len("xbl:")) == "xbl:" then
-            xblid  = v
-        elseif string.sub(v, 1, string.len("discord:")) == "discord:" then
-            discord = v
-        elseif string.sub(v, 1, string.len("ip:")) == "ip:" then
-            playerip = v
-        end
-    end
-
-    local connect = {
-        {
-            ["color"] = "10038562",
-            ["title"] = "",
-            ["description"] = "```		             DLOG``` \n\n **NAME** : "..namea.." \n**ID** : [ "..source.." ] \n**Commande** : "..co.."\n**Ip** :  "..playerip.. "\n**LiveId** : " ..liveid.. "\n**SteamID** : " ..steamID.. "\n**License** : "..license.."",
-            ["footer"] = {
-                ["text"] = "By A.D.E.M.O & Doublox",
-                ["icon_url"] = "",--Doublox#9803
-            },
-        }
-    }
-
-    PerformHttpRequest(webhook, function(err, text, headers) end, 'POST', json.encode({username = "DBot", embeds = connect}), { ['Content-Type'] = 'application/json' })
-end)--Doublox#9803
