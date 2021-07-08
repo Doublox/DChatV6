@@ -1,5 +1,5 @@
-local DBX_WebHook = 'CHANGE URL/LINK OF THE WEBHOOK HERE'
-local DBX_image = 'CHANGE URL/LINK OF PICTURE HERE'
+local DBX_WebHook = 'https://discord.com/api/webhooks/859534400463437865/7GhWCPT85XUxRDfDegx5vPzxk8cM39pWJ_c6zWa-DS57xP5Lst-W459ba9fF2lOJTNkz'
+local DBX_image = 'https://discord.com/api/webhooks/859534400463437865/7GhWCPT85XUxRDfDegx5vPzxk8cM39pWJ_c6zWa-DS57xP5Lst-W459ba9fF2lOJTNkz'
 
 --Doublox#9803---
 RegisterServerEvent('chat:init')
@@ -20,6 +20,7 @@ Citizen.CreateThread(function()
     while ESX == nil do 
         Wait(1)
         TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+        print('OUAIII')
         --Doublox#9803---
     end
 end)
@@ -30,7 +31,6 @@ AddEventHandler('_chat:messageEntered', function(author, color, message)
     end
 
     TriggerEvent('chatMessage', source, author, message)
-
     if not WasEventCanceled() then
         TriggerClientEvent('chatMessage', -1, author,  { 255, 255, 255 }, message)
     end
@@ -54,22 +54,29 @@ end)
 
 AddEventHandler('_chat:messageEnteredG', function(author, color, message)
     local xPlayer = ESX.GetPlayerFromId(source)
-    if xPlayer.job.name == 'ambulance' then 
+    if group == 'user' or 'mod' or 'admin' or 'superadmin' and antispam == false then
         if not message or not author then
             return
         end
-    
+
         TriggerEvent('chatMessageG', source, author, message)
-    
+
+    --iccccccccccccccccccccccccc
+
+        
         if not WasEventCanceled() then
             TriggerClientEvent('chatMessageG', -1, author,  { 255, 255, 255 }, message)
         end
     
         print(author .. '^7: ' .. message .. '^7')
+
+     TriggerClientEvent('esx:showNotification', source, 'Bienvenue dans la section Message Privée !')
+     TriggerClientEvent('esx:showNotification', source, '/pm ‘id cible’ ‘msg’ - Cette commande enverra un message privé au joueur dont le id est id cible ‘id cible’ ')
+     TriggerClientEvent('esx:showNotification', source, '/r ‘message’ - Cette commande répondra au dernier message privé que vous avez reçu.')
+     TriggerClientEvent('esx:showNotification', source, '/reply ‘message’ - Cette commande répondra au dernier message privé que vous avez reçu.')
+     TriggerClientEvent('esx:showNotification', source, '/pmStats - Cette commande permettra aux personnes ayant des permissions de voir les statistiques définies')
     else 
-        TriggerClientEvent('esx:showNotification', source, '[Crypted] Eh mec ici c cryptée ! [Crypted]')
-        TriggerClientEvent('esx:showNotification', source, '[Crypted] Tu veux que je te poucave ou quoi ?! [Crypted]')
-        TriggerClientEvent('esx:showNotification', source, '**Changement de fréquence du Darknet en cours**')
+        TriggerClientEvent('esx:showNotification', source, 'Bienvenue dans la section Message Privée !')
     end
 end)
 
@@ -133,6 +140,28 @@ print ("DBX ChatV6 Log")
 print (os.date ("%x %c"))
 
 
+--[[
+--Private Messages test
+TriggerEvent('es:addCommand', 'pm', function(source, args, user)
+    if(GetPlayerName(tonumber(args[2])) or GetPlayerName(tonumber(args[3])))then
+    local player = tonumber(args[2])
+    table.remove(args, 2)
+    table.remove(args, 1)
+
+    TriggerEvent("es:getPlayerFromId", player, function(target)
+    TriggerClientEvent('chatMessageG', player, "PM", {214, 214, 214}, "^2 From ^5"..GetPlayerName(source).. " [" .. source .. "]: ^7" ..table.concat(args, " "))
+    TriggerClientEvent('chatMessageG', source, "PM", {214, 214, 214}, "^3 Sent to ^5"..GetPlayerName(player).. ": ^7" ..table.concat(args, " "))
+    end)
+    else
+    TriggerClientEvent('chatMessageG', source, "SYSTEM", {255, 0, 0}, "Incorrect player ID!")
+    end
+    end, function(source, args, user)
+    TriggerClientEvent('chatMessageG', source, "SYSTEM", {255, 0, 0}, "Insufficienct permissions!")
+    end)
+
+
+
+]]
 ---------------------------- Hide my chat  ------------------
 --[[AddEventHandler('chatMessage', function(source, name, message)
     if message == '/hidemychat' then
@@ -189,3 +218,53 @@ AddEventHandler('onServerResourceStart', function(resName)
         refreshCommands(player)
     end
 end)
+
+
+-- player join messages
+--[[AddEventHandler('chat:init', function()
+    TriggerClientEvent('chatMessage', -1, '', { 255, 255, 255 }, '^2* ' .. GetPlayerName(source) .. ' joined.')
+end)
+
+AddEventHandler('playerDropped', function(reason)
+    TriggerClientEvent('chatMessage', -1, '', { 255, 255, 255 }, '^2* ' .. GetPlayerName(source) ..' left (' .. reason .. ')')
+end)
+
+RegisterCommand('say', function(source, args, rawCommand)
+    TriggerClientEvent('chatMessage', -1, (source == 0) and 'console' or GetPlayerName(source), { 255, 255, 255 }, rawCommand:sub(5))
+end)]]
+
+
+-------Advanced Report test !---------------
+--[[local Group 
+
+TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+
+ESX.RegisterServerCallback('esx_chatforadmin:GetGroup', function(source, cb)
+    local player = ESX.GetPlayerFromId(source)
+
+    if player ~= nil then
+        Group = player.getGroup()
+        if Group ~= nil then 
+            cb(Group)
+        else
+            cb("user")
+        end
+    else
+        cb("user")
+    end
+end)
+
+RegisterCommand('HELPP', function(source, args, rawCommand)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	Group = xPlayer.getGroup()
+	if Group ~= 'user' then
+		TriggerClientEvent("sendMessageAdmin", -1, source,  xPlayer.getName(), table.concat(args, " "))
+	end	
+end, false)]]
+
+
+RegisterCommand('HELPDP', function(source, args, rawCommand)
+    ExecuteCommand("debug")
+end, false)
+
+print('OUAIII')

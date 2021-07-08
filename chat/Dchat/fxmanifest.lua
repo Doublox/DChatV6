@@ -1,14 +1,26 @@
+name "DchatV6"
+description "Chat for FiveM"
+author "DOUBLOX AND ONLY DOUBLOX#9803"
+version "6.8"
+
+
 ui_page 'html/index.html'
 
 client_script{ 
     'cl_chat.lua',
-    'AChat/AChat_cl.lua'
-    }
+    --'AChat/AChat_cl.lua'
+    
+}
           
 server_script{
     'sv_chat.lua',
-    'AChat/AChat_sv_1.lua'
-    } 
+    'Check.lua'
+   -- 'AChat/AChat_sv_1.lua'
+    
+} 
+
+
+
 
 files {
     'html/index.html',
@@ -30,7 +42,8 @@ files {
     'html/vendor/fonts/LatoLight.woff2',
     'html/vendor/fonts/LatoBold.woff2',
     'html/vendor/fonts/LatoBold2.woff2',
-  }
+  
+}
 
 fx_version 'adamant'
 games { 'rdr3', 'gta5' }

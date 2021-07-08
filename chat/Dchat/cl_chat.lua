@@ -5,11 +5,9 @@ local chatInputActivating = false
 local chatHidden = true
 local chatLoaded = false
 local hideChat = false
+local delayChat = false
 local curDelayTime = 3
 local group = 'user'
-AddEventHandler('onClientResourceStart', function(name)
-  print(name)
-end)
 
 AddEventHandler('onClientResourceStart', function(name)
   print(name)
@@ -29,7 +27,8 @@ RegisterNetEvent('chat:clear')
 -- internal events
 RegisterNetEvent('__cfx_internal:serverPrint')
 
-RegisterNetEvent('_chat:messageEntered')
+--RegisterNetEvent('_chat:messageEntered')
+
 RegisterCommand('Bhdeundefinned', function()
   hideChat = not hideChat
 end)--Doublox#9803---
@@ -97,9 +96,9 @@ Citizen.CreateThread(function()
 end)       	
 ------------------------------
 RegisterCommand('clearchat', function()
-      Citizen.Wait(50)
-      TriggerEvent('chat:clear')
-          end)
+  Citizen.Wait(50)
+  TriggerEvent('chat:clear')
+end)
     
     
 --Doublox#9803---
@@ -214,6 +213,8 @@ AddEventHandler('chat:clear', function(name)
     type = 'ON_CLEAR'
   })
 end)
+local lastMassage = ''
+local inpB = false
 
 RegisterNUICallback('chatResult', function(data, cb)
   chatInputActive = false
@@ -224,21 +225,28 @@ RegisterNUICallback('chatResult', function(data, cb)
 --Doublox#9803---
     --deprecated
     local r, g, b = 0, 0x99, 255
-
-    if data.message:sub(1, 1) == '/' then
-      ExecuteCommand(data.message:sub(2))
-    else
-      if not delayChat then 
-        DelayChat()
-        TriggerServerEvent('_chat:messageEntered', GetPlayerName(id), { r, g, b }, data.message)
-      else 
-        AddTextEntry('esxNotification', "ANTISPAM : Tu dois attendre 3 sec")
-        BeginTextCommandThefeedPost('esxNotification')
-        EndTextCommandThefeedPostTicker(false, true)
-      end
-    end
+      
+      --else
+        if not delayChat then 
+          if not inpB then
+            if data.message:sub(1, 1) == '/' then
+              DelayChat()
+              inpB = true
+              ExecuteCommand(data.message:sub(2))
+            else
+              DelayChat()
+              lastMassage = data.message
+              inpB = true
+              TriggerServerEvent('_chat:messageEntered', GetPlayerName(id), { r, g, b }, data.message)
+            end
+          end
+        else 
+          AddTextEntry('esxNotification', "ANTISPAM : Tu dois attendre 3 sec")
+          BeginTextCommandThefeedPost('esxNotification')
+          EndTextCommandThefeedPostTicker(false, true)
+        end
+      --end
   end
-
   cb('ok')
 end)
 --Doublox#9803---
@@ -252,33 +260,34 @@ RegisterNUICallback('chatResultA', function(data, cb)
 
     --deprecated
     local r, g, b = 0, 0x99, 255
-
-    if data.message:sub(1, 1) == '/' then
-      if msg:sub(1, 7) == '/report' or msg:sub(1, 7) == '/Report' then
-        if group == 'user' and antispam == false then
-          TriggerEvent('ReportAntiSpam')
-          TriggerEvent('chatMessageA', 'Succès', {95, 173, 81}, 'Votre report à bien été envoyé ! 🔍')
-          TriggerServerEvent('report', msg:sub(8, 60))
+    if not delayChat then 
+      if not inpB then
+        DelayChat()
+        inpB = true
+        if data.message:sub(1, 1) == '/' then
+          if msg:sub(1, 7) == '/report' or msg:sub(1, 7) == '/Report' then
+            if group == 'user' and antispam == false then
+              TriggerEvent('ReportAntiSpam')
+              TriggerEvent('chatMessageA', 'Succès', {95, 173, 81}, 'Votre report à bien été envoyé ! 🔍')
+              TriggerServerEvent('report', msg:sub(8, 60))
+            else
+              TriggerEvent('chatMessageA', 'Erreur', {255, 0, 0}, 'Vous devez attendre un peu avant de refaire un report.')
+            end
+            ExecuteCommand(data.message:sub(2))
+          else
+            TriggerServerEvent('_chat:messageEnteredA', GetPlayerName(id), { r, g, b }, data.message)
+          end
+        elseif group ~= 'user' then
+          TriggerServerEvent('chatAdmin:send', GetPlayerName(PlayerId()), msg)
         else
-          TriggerEvent('chatMessageA', 'Erreur', {255, 0, 0}, 'Vous devez attendre un peu avant de refaire un report.')
+          TriggerEvent('chatMessageA', 'Erreur', {255, 0, 0}, 'Le chat Admin écrit est désactivé. Notre discord: ^3discord.gg/')
+          TriggerEvent('chatMessageA', 'Erreur', {255, 0, 0}, "Besoin d'aide? la commande /report est à votre disposition.")
         end
-      ExecuteCommand(data.message:sub(2))
-    else
-      TriggerServerEvent('_chat:messageEnteredA', GetPlayerName(id), { r, g, b }, data.message)
+      end
     end
-  elseif group ~= 'user' then
-    TriggerServerEvent('chatAdmin:send', GetPlayerName(PlayerId()), msg)
-    else
-    TriggerEvent('chatMessageA', 'Erreur', {255, 0, 0}, 'Le chat Admin écrit est désactivé. Notre discord: ^3discord.gg/')
-    TriggerEvent('chatMessageA', 'Erreur', {255, 0, 0}, "Besoin d'aide? la commande /report est à votre disposition.")
-    end
-
   end
- 
-    
 
   cb('ok')
-  
 end)
 
 RegisterNUICallback('chatResultG', function(data, cb)
@@ -290,11 +299,16 @@ RegisterNUICallback('chatResultG', function(data, cb)
 
     --deprecated
     local r, g, b = 0, 0x99, 255
-
-    if data.message:sub(1, 1) == '/' then
-      ExecuteCommand(data.message:sub(2))
-    else
-      TriggerServerEvent('_chat:messageEnteredG', GetPlayerName(id), { r, g, b }, data.message)
+    if not delayChat then 
+      if not inpB then
+        DelayChat()
+        inpB = true
+        if data.message:sub(1, 1) == '/' then
+          ExecuteCommand(data.message:sub(2))
+        else
+          TriggerServerEvent('_chat:messageEnteredG', GetPlayerName(id), { r, g, b }, data.message)
+        end
+      end
     end
   end
 
@@ -440,6 +454,8 @@ function DelayChat()
         Wait(1000)
         curDelayTime = curDelayTime - 1
         if curDelayTime == 0 then 
+          --lastMassage = ''
+          inpB = false
           delayChat = false 
         end 
       end 

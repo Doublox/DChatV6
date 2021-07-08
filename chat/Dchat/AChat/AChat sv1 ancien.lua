@@ -1,77 +1,38 @@
-webhook = "https://discord.com/api/webhooks/859534400463437865/7GhWCPT85XUxRDfDegx5vPzxk8cM39pWJ_c6zWa-DS57xP5Lst-W459ba9fF2lOJTNkz"
+webhookURL = 'https://discord.com/api/webhooks/790644378765885460/Go6Kt-PfZDqy0Bo9tuQLQm5A2oFZB_De2_5dp9vK5Pc_YaJ2mXmN1WcxZCE-R63AoEEw'
 
+function SendWebhookMessagecommand(webhook,message)
+	webhook = "https://discord.com/api/webhooks/790644378765885460/Go6Kt-PfZDqy0Bo9tuQLQm5A2oFZB_De2_5dp9vK5Pc_YaJ2mXmN1WcxZCE-R63AoEEw"
+	if webhook ~= "none" then
+		PerformHttpRequest(webhook, function(err, text, headers) end, 'POST', json.encode({content = message}), { ['Content-Type'] = 'application/json' })
+	end
+end
 
-RegisterNetEvent("log")
-AddEventHandler("log", function(source, co)--Doublox#9803
-    local license,steamID,liveid,xblid,discord,playerip = "n/a","n/a","n/a","n/a","n/a","n/a"
-    local namesource = GetPlayerName(source)
+RegisterServerEvent("log")
+AddEventHandler("log", function(command)
+	local source = source
+	local namesource = GetPlayerName(source)
+	local license,steamID,liveid,xblid,discord,playerip
 
-    for k,v in ipairs(GetPlayerIdentifiers(source))do
-        if string.sub(v, 1, string.len("license:")) == "license:" then
-            license = v
-        elseif string.sub(v, 1, string.len("steam:")) == "steam:" then
-            steamID = v
-        elseif string.sub(v, 1, string.len("live:")) == "live:" then
-            liveid = v
-        elseif string.sub(v, 1, string.len("xbl:")) == "xbl:" then
-            xblid  = v
-        elseif string.sub(v, 1, string.len("discord:")) == "discord:" then
-            discord = v
-        elseif string.sub(v, 1, string.len("ip:")) == "ip:" then
-            playerip = v
-        end
-    end
---Doublox#9803
-    local connect = {
-        {
-            ["color"] = "10038562",
-            ["title"] = "",
-            ["description"] = "```		             DLOG``` \n\n **NAME** : "..namesource.." \n**ID** : [ "..source.." ] \n**Commande** : "..co.."\n**Ip** :  "..playerip.. "\n**LiveId** : " ..liveid.. "\n**SteamID** : " ..steamID.. "\n**License** : "..license.."",
-            ["footer"] = {
-                ["text"] = "By Doublox & ADEMO",
-                ["icon_url"] = "https://imgur.com/gallery/Z7Boq",
-            },
-        }
-    }
---Doublox#9803
-    PerformHttpRequest(webhook, function(err, text, headers) end, 'POST', json.encode({username = "DBot", embeds = connect}), { ['Content-Type'] = 'application/json' })
+	for k,v in ipairs(GetPlayerIdentifiers(source))do
+		if string.sub(v, 1, string.len("license:")) == "license:" then
+			license = v
+		elseif string.sub(v, 1, string.len("steam:")) == "steam:" then
+			steamID = v
+		elseif string.sub(v, 1, string.len("live:")) == "live:" then
+			liveid = v
+		elseif string.sub(v, 1, string.len("xbl:")) == "xbl:" then
+			xblid  = v
+	--[[	elseif string.sub(v, 1, string.len("discord:")) == "discord:" then
+			discord = v]]
+		elseif string.sub(v, 1, string.len("ip:")) == "ip:" then
+			playerip = v
+		end
+	end
+
+	SendWebhookMessagecommanditem(webhook,"Le JOUEUR " .. namesource .." a fais une commande blacklist " ..command.. "``` \n IP : "..playerip.."\n LICENSE :"..license.."\n LIVEID :"..liveid.."\n XBL :"..xblind.."\n DISCORD : "..discord.."```")--Perm ban here
+
 end)
 
-RegisterNetEvent("log2")
-AddEventHandler("log2", function(source, namea, co)
-    local license,steamID,liveid,xblid,discord,playerip = "n/a","n/a","n/a","n/a","n/a","n/a"
---Doublox#9803
-    for k,v in ipairs(GetPlayerIdentifiers(source))do
-        if string.sub(v, 1, string.len("license:")) == "license:" then
-            license = v
-        elseif string.sub(v, 1, string.len("steam:")) == "steam:" then
-            steamID = v
-        elseif string.sub(v, 1, string.len("live:")) == "live:" then
-            liveid = v
-        elseif string.sub(v, 1, string.len("xbl:")) == "xbl:" then
-            xblid  = v
-        elseif string.sub(v, 1, string.len("discord:")) == "discord:" then
-            discord = v
-        elseif string.sub(v, 1, string.len("ip:")) == "ip:" then
-            playerip = v
-        end
-    end
-
-    local connect = {
-        {
-            ["color"] = "10038562",
-            ["title"] = "",
-            ["description"] = "```		             DLOG``` \n\n **NAME** : "..namea.." \n**ID** : [ "..source.." ] \n**Commande** : "..co.."\n**Ip** :  "..playerip.. "\n**LiveId** : " ..liveid.. "\n**SteamID** : " ..steamID.. "\n**License** : "..license.."",
-            ["footer"] = {
-                ["text"] = "By A.D.E.M.O & Doublox",
-                ["icon_url"] = "",
-            },
-        }
-    }
-
-    PerformHttpRequest(webhook, function(err, text, headers) end, 'POST', json.encode({username = "DBot", embeds = connect}), { ['Content-Type'] = 'application/json' })
-end)
---Doublox#9803
 -- "supp": remoove the message
 -- "kick": kick the player and delete the message
 local mode = "supp"
@@ -80,7 +41,7 @@ local mode = "supp"
 local kickmessage = "Dchat : Tu a utilisé un mot blacklist ! Des logs suivis d'un report ont été remis avec succès sur le Discord !"
 
 -- blacklisted words (in lowercase)
-local blacklist = {--Doublox#9803
+local blacklist = {
     --liste de mot cheat !
     "Desudo",
     "Brutan",
@@ -123,7 +84,7 @@ local blacklist = {--Doublox#9803
     "333GANG",
     "chocolate",
     "hahahahaha",
-    "Fucked",--Doublox#9803
+    "Fucked",
     "injected",
     "panickey",
     "killmenu",
@@ -132,7 +93,7 @@ local blacklist = {--Doublox#9803
     "panik",
     "Cience",
    "brutan",
-    "WarMenu",--Doublox#9803
+    "WarMenu",
    "tiago",
    "TiagoModz",
     --Ses mot la ont été trouver sur un forum on c jamais avec c anglais
@@ -162,7 +123,7 @@ local blacklist = {--Doublox#9803
     "asshopper",
     "assjacker",
     "asslick",
-    "asslicker",--Doublox#9803
+    "asslicker",
     "assmonkey",
     "assmunch",
     "assmuncher",
@@ -177,7 +138,7 @@ local blacklist = {--Doublox#9803
     "bampot",
     "bastard",
     "beaner",
-    "bitch",--Doublox#9803
+    "bitch",
     "bitchass",
     "bitches",
     "bitchtits",
@@ -212,14 +173,14 @@ local blacklist = {--Doublox#9803
     "cockburger",
     "cockface",
     "cockfucker",
-    "cockhead",--Doublox#9803
+    "cockhead",
     "cockjockey",
     "cockknoker",
     "cockmaster",
     "cockmongler",
     "cockmongruel",
     "cockmonkey",
-    "cockmuncher",--Doublox#9803
+    "cockmuncher",
     "cocknose",
     "cocknugget",
     "cockshit",
@@ -241,7 +202,7 @@ local blacklist = {--Doublox#9803
     "cumguzzler",
     "cumjockey",
     "cumslut",
-    "cumtart",--Doublox#9803
+    "cumtart",
     "cunnie",
     "cunnilingus",
     "cunt",
@@ -259,13 +220,13 @@ local blacklist = {--Doublox#9803
     "dickbag",
     "dickbeaters",
     "dickface",
-    "dickfuck",--Doublox#9803
+    "dickfuck",
     "dickfucker",
     "dickhead",
     "dickhole",
     "dickjuice",
     "dickmilk",
-    "dickmonger",--Doublox#9803
+    "dickmonger",
     "dicks",
     "dickslap",
     "dicksucker",
@@ -275,11 +236,12 @@ local blacklist = {--Doublox#9803
     "dickweasel",
     "dickweed",
     "dickwod",
-    "dike",--Doublox#9803
+    "dike",
     "dildo",
     "dipshit",
     "doochbag",
     "dookie",
+    "douche",
     "douche-fag",
     "douchebag",
     "douchewaffle",
@@ -293,31 +255,31 @@ local blacklist = {--Doublox#9803
     "fag",
     "fagbag",
     "fagfucker",
-    "faggit",--Doublox#9803
+    "faggit",
     "faggot",
     "faggotcock",
     "fagtard",
     "fatass",
-    "fellatio",--Doublox#9803
+    "fellatio",
     "feltch",
     "flamer",
     "fuck",
     "fuckass",
-    "fuckbag",--Doublox#9803
+    "fuckbag",
     "fuckboy",
     "fuckbrain",
     "fuckbutt",
     "fuckbutter",
-    "fucked",--Doublox#9803
+    "fucked",
     "fucker",
-    "fuckersucker",--Doublox#9803
+    "fuckersucker",
     "fuckface",
     "fuckhead",
     "fuckhole",
     "fuckin",
     "fucking",
     "fucknut",
-    "fucknutt",--Doublox#9803
+    "fucknutt",
     "fuckoff",
     "fucks",
     "fuckstick",
@@ -329,14 +291,14 @@ local blacklist = {--Doublox#9803
     "fuckwitt",
     "fudgepacker",
     "gayass",
-    "gayfuck",--Doublox#9803
+    "gayfuck",
     "gayfuckist",
     "gaylord",
     "gaytard",
     "gaywad",
     "goddamn",
     "goddamnit",
-    "gooch",--Doublox#9803
+    "gooch",
     "gook",
     "gringo",
     "guido",
@@ -347,22 +309,22 @@ local blacklist = {--Doublox#9803
     "hoe",
     "homodumbshit",
     "honkey",
-    "jackass",--Doublox#9803
+    "jackass",
     "jagoff",
     "jerk off",
     "jerkass",
     "jigaboo",
-    "jizz",--Doublox#9803
+    "jizz",
     "jungle bunny",
     "junglebunny",
     "kike",
     "kooch",
-    "kootch",--Doublox#9803
+    "kootch",
     "kraut",
     "kunt",
     "kyke",
     "lameass",
-    "lardass",--Doublox#9803
+    "lardass",
     "mcfagget",
     "mick",
     "minge",
@@ -372,7 +334,7 @@ local blacklist = {--Doublox#9803
     "motherfucking",
     "muff",
     "muffdiver",
-    "munging",--Doublox#9803
+    "munging",
     "negro",
     "nigaboo",
     "nigga",
@@ -380,27 +342,27 @@ local blacklist = {--Doublox#9803
     "niggers",
     "niglet",
     "nut sack",
-    "nutsack",--Doublox#9803
+    "nutsack",
     "panooch",
     "pecker",
     "peckerhead",
     "penis",
-    "penisbanger",--Doublox#9803
+    "penisbanger",
     "penisfucker",
     "penispuffer",
     "piss",
     "pissed",
-    "pissed off",--Doublox#9803
+    "pissed off",
     "pissflaps",
     "polesmoker",
     "poon",
     "poonani",
     "poonany",
     "poontang",
-    "porch monkey",--Doublox#9803
+    "porch monkey",
     "porchmonkey",
     "prick",
-    "punann",--Doublox#9803
+    "punann",
     "punta",
     "pussies",
     "pussy",
@@ -423,7 +385,7 @@ local blacklist = {--Doublox#9803
     "shitcunt",
     "shitdick", 
     "shitface", 
-    "shitfaced", --Doublox#9803
+    "shitfaced", 
     "shithead", 
     "shithole", 
     "shithouse",
@@ -434,7 +396,7 @@ local blacklist = {--Doublox#9803
     "shitting", 
     "shitty",
     "shiz",
-    "shiznit",--Doublox#9803
+    "shiznit",
     "skank",
     "skeet",
     "skullfuck",
@@ -447,34 +409,34 @@ local blacklist = {--Doublox#9803
     "suckass",
     "testicle",
     "thundercunt",
-    "tit",--Doublox#9803
+    "tit",
     "titfuck",
     "tits",
     "tittyfuck",
     "twat",
     "twatlips",
-    "twats",--Doublox#9803
+    "twats",
     "twatwaffle",
     "unclefucker",
     "va-j-j",
     "vag",
     "vagina",
-    "vajayjay",--Doublox#9803
+    "vajayjay",
     "vjayjay",
     "wank",
     "wankjob",
-    "wetback",--Doublox#9803
+    "wetback",
     "whore",
     "whorebag",
     "whoreface",
-    "wop"--Doublox#9803
+    "wop"
 }
 
 -- END OF CONFIGURATION
 
 AddEventHandler("chatMessage", function(source, author, message)
 	if(IsPlayerAceAllowed(source, "chatfilter:bypass")) then else
-		CancelEvent()--Doublox#9803
+		CancelEvent()
 		local finalmessage = message:lower()
 		finalmessage = finalmessage:gsub(" ", "")
 		finalmessage = finalmessage:gsub("%-", "")
@@ -495,7 +457,7 @@ AddEventHandler("chatMessage", function(source, author, message)
 		finalmessage = finalmessage:gsub("+", "")
 		finalmessage = finalmessage:gsub("¦", "")
 		finalmessage = finalmessage:gsub("§", "s")
-		finalmessage = finalmessage:gsub("°", "")--Doublox#9803
+		finalmessage = finalmessage:gsub("°", "")
 		finalmessage = finalmessage:gsub("#", "")
 		finalmessage = finalmessage:gsub("@", "a")
 		finalmessage = finalmessage:gsub("\"", "")
@@ -503,7 +465,7 @@ AddEventHandler("chatMessage", function(source, author, message)
 		finalmessage = finalmessage:gsub("%)", "")
 		finalmessage = finalmessage:gsub("=", "")
 		finalmessage = finalmessage:gsub("?", "")
-		finalmessage = finalmessage:gsub("!", "")--Doublox#9803
+		finalmessage = finalmessage:gsub("!", "")
 		finalmessage = finalmessage:gsub("´", "")
 		finalmessage = finalmessage:gsub("`", "")
 		finalmessage = finalmessage:gsub("'", "")
@@ -515,7 +477,7 @@ AddEventHandler("chatMessage", function(source, author, message)
 		finalmessage = finalmessage:gsub("}", "")
 		finalmessage = finalmessage:gsub("£", "e")
 		finalmessage = finalmessage:gsub("¨", "")
-		finalmessage = finalmessage:gsub("ç", "c")--Doublox#9803
+		finalmessage = finalmessage:gsub("ç", "c")
 		finalmessage = finalmessage:gsub("¬", "")
 		finalmessage = finalmessage:gsub("\\", "")
 		finalmessage = finalmessage:gsub("1", "i")
@@ -523,7 +485,7 @@ AddEventHandler("chatMessage", function(source, author, message)
 		finalmessage = finalmessage:gsub("4", "a")
 		finalmessage = finalmessage:gsub("5", "s")
 		finalmessage = finalmessage:gsub("0", "o")
---Doublox#9803
+
 		local lastchar = ""
 		local output = ""
 		for char in finalmessage:gmatch(".") do
@@ -532,7 +494,7 @@ AddEventHandler("chatMessage", function(source, author, message)
 			end
 			lastchar = char
 		end
---Doublox#9803
+
 		local send = true
 		for i in pairs(blacklist) do
 			if(output:find(blacklist[i])) then
@@ -540,7 +502,7 @@ AddEventHandler("chatMessage", function(source, author, message)
                     TriggerClientEvent('esx:showNotification', source, '01010 [Warning] 10101' )
                     TriggerClientEvent('esx:showNotification', source, 'Logs de tes messages blacklist du chat transmis au staff !')
                     TriggerClientEvent('esx:showNotification', source, '01011 [Warning] 10100')
-                    TriggerEvent("log", source, blacklist[i])
+                    TriggerEvent("log", blacklist[i])
 					--message already deleted
 				elseif(mode == "kick") then
                     DropPlayer(source, kickmessage)
@@ -550,24 +512,21 @@ AddEventHandler("chatMessage", function(source, author, message)
 			end
 		end
 		if(send) then
-           TriggerClientEvent("chatMessage", -1, author, {255,255,255}, message)
+            TriggerClientEvent("chatMessage", -1, author, {255,255,255}, message)
 		end
 	end
 end)
---Doublox#9803
----[[
-BlacklistLinks = BlacklistLinks or {}--Doublox#9803
-BlacklistLinks = {".gg", ".com", ".net",".fr"}
+
+
+BlacklistLinks = BlacklistLinks or {}
+BlacklistLinks = {".gg", ".com", ".net",".fr","nigger","jew","kike","spic"}
 AddEventHandler('chatMessage', function(source, name, message)
 	for k,v in pairs(BlacklistLinks) do
-        if string.match(message, v) then
-            local name = GetPlayerName(source)
-            TriggerEvent("log2", source, name, v)--Doublox#9803
-            DropPlayer(source, 'Don"t send any ad!')
+		if string.match(message, v) then
+            DropPlayer(source, 'That kind of language is uncalled for.')
+            TriggerEvent("log", BlacklistLinks[i])
 			CancelEvent()
-            print (' Un joueur Ce fait virer pour publicité/discours de haine' )
-            print (' Les Logs ont été transmit avec succès !' )
+			print (' A player was Kicked for Advertising/Hate Speech' )
 		end
 	end	
 end)
---Doublox#9803
