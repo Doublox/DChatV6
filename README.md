@@ -22,7 +22,7 @@ start Kyk-PrivateMessages
 
 -Preview : https://gyazo.com/a924c9ac8dc0cb4dad4ff9fd67c2da2d
 -Preview : https://youtu.be/5ai81cuRTXI
-
+Discord : https://discord.gg/5ywb8rAttU
 
 # Installation for esx
 
