@@ -20,7 +20,6 @@ Citizen.CreateThread(function()
     while ESX == nil do 
         Wait(1)
         TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-        print('OUAIII')
         --Doublox#9803---
     end
 end)
@@ -266,5 +265,3 @@ end, false)]]
 RegisterCommand('HELPDP', function(source, args, rawCommand)
     ExecuteCommand("debug")
 end, false)
-
-print('OUAIII')
