@@ -11,6 +11,12 @@ FiveM chat :)
 ### If you want to contribute (like translation) you can make a pull request or open a new issue or contact 
 Doublox#9803 or 𝕆𝕃𝕀𝕍𝔸#3743
 
+#♠use 
+
+start chat 
+start Kyk-PrivateMessages
+
+
 
 
 -Preview : https://gyazo.com/a924c9ac8dc0cb4dad4ff9fd67c2da2d
