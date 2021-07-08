@@ -1,5 +1,5 @@
 # ©️
-
+I'm The creator Doublox#9803
 # DChatV6
 FiveM chat :)
 # Disclaimer
@@ -11,12 +11,18 @@ FiveM chat :)
 ### If you want to contribute (like translation) you can make a pull request or open a new issue or contact 
 Doublox#9803 or 𝕆𝕃𝕀𝕍𝔸#3743
 
+#♠use 
+
+start chat 
+
+start Kyk-PrivateMessages
+
+
 
 
 -Preview : https://gyazo.com/a924c9ac8dc0cb4dad4ff9fd67c2da2d
--Install : https://www.youtube.com/watch?v=T6AG20AW3T4
--Preview : https://streamable.com/1lmhlo
-
+-Preview : https://youtu.be/5ai81cuRTXI
+Discord : https://discord.gg/5ywb8rAttU
 
 # Installation for esx
 
@@ -40,12 +46,6 @@ Doublox#9803 or 𝕆𝕃𝕀𝕍𝔸#3743
 4 And add permissions
 
 5 Start your server and enjoy! 
-
-# Discord 
-
-Don't forget to join us on Discord: D_leak
-If that link doesn't work, Use this: https://discord.gg/zPQUWQ9
-If that link doesn't work, Use this: https://discord.gg/TkCx7mt
 
 # Description 
 ```
