@@ -1,5 +1,5 @@
 # ©️
-
+I'm The creator Doublox#9803
 # DChatV6
 FiveM chat :)
 # Disclaimer
@@ -40,12 +40,6 @@ Doublox#9803 or 𝕆𝕃𝕀𝕍𝔸#3743
 4 And add permissions
 
 5 Start your server and enjoy! 
-
-# Discord 
-
-Don't forget to join us on Discord: D_leak
-If that link doesn't work, Use this: https://discord.gg/zPQUWQ9
-If that link doesn't work, Use this: https://discord.gg/TkCx7mt
 
 # Description 
 ```
